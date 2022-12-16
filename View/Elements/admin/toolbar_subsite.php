@@ -13,6 +13,9 @@ $this->BcBaser->css('SubsiteMenu.admin/subsite_menu', ['inline' => true]);
 	}
 	// サブサイトリストのオプションにメインサイトを追加
 	array_unshift($sites, $this->BcBaser->siteConfig['main_site_display_name']);
+	// 管理画面のプレフィックスを変更している場合に対応
+	$admin = Configure::read('Routing.prefixes');
+	$adminUrl = !empty($admin) ? $admin[0] : 'admin';
 	?>
 	<div class="bca-panel-box__inline-fields-item">
 		<label class="bca-toolbar__logo-text bca-panel-box__inline-fields-title"><?php echo $siteId ? __d('baser', 'サブサイト') : __d('baser', 'メインサイト') ?></label>
@@ -20,7 +23,7 @@ $this->BcBaser->css('SubsiteMenu.admin/subsite_menu', ['inline' => true]);
 		$options = [
 			'type' => 'select',
 			'options' => $sites,
-			'onChange' => 'location.href="/cmsadmin/contents/index/site_id:" + value;', // 選択時にそのサイトに移動する
+			'onChange' => 'location.href="/'. $adminUrl. '/contents/index/site_id:" + value;', // 選択時にそのサイトに移動する
 		];
 		if ($siteId !== false) {
 			$options['selected'] = $siteId === null ? 0 : $siteId;
