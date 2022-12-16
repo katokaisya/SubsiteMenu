@@ -16,6 +16,10 @@ class SubsiteMenuViewEventListener extends BcViewEventListener
 			return;
 		}
 		$View = $event->subject();
+		// ログイン画面も対象外
+		if ($View->request->action == 'admin_login') {
+			return;
+		}
 		// 設定の読み込み
 		$settings = Configure::read('SubsiteMenu');
 		// ログインユーザーとユーザーグループを取得

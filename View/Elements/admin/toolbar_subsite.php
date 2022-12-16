@@ -5,7 +5,7 @@
  */
 $this->BcBaser->css('SubsiteMenu.admin/subsite_menu', ['inline' => true]);
 ?>
-<?php if (count($sites) >= 2): ?>
+<?php if (count($sites) >= 1): ?>
 	<?php
 	 // 現在のサイトIDがデータに含まれていない場合、セッションから取得する
 	if (!isset($siteId) || !$siteId) {
