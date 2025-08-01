@@ -12,7 +12,8 @@ $this->BcBaser->css('SubsiteMenu.admin/subsite_menu', ['inline' => true]);
 		$siteId = $this->Session->read('Baser.viewConditions.ContentsAdminIndex.named.site_id');
 	}
 	// サブサイトリストのオプションにメインサイトを追加
-	array_unshift($sites, $this->BcBaser->siteConfig['main_site_display_name']);
+	$mainsite[] = $this->BcBaser->siteConfig['main_site_display_name'];
+	$sites = $mainsite + $sites; // 配列をマージする場合、キーを維持したいときは足し算を使う
 	// 管理画面のプレフィックスを変更している場合に対応
 	$admin = Configure::read('Routing.prefixes');
 	$adminUrl = !empty($admin) ? $admin[0] : 'admin';
